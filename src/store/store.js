@@ -1,0 +1,11 @@
+"use strict";
+var history_1 = require('history');
+var redux_1 = require('redux');
+var redux_saga_1 = require('redux-saga');
+var connected_react_router_1 = require('connected-react-router');
+var root_reducer_1 = require('./root-reducer');
+var composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || redux_1.compose;
+exports.history = history_1.createBrowserHistory();
+var sagaMiddleware = redux_saga_1["default"]();
+exports.store = redux_1.createStore(connected_react_router_1.connectRouter(exports.history)(root_reducer_1["default"]), composeEnhancer(redux_1.applyMiddleware(connected_react_router_1.routerMiddleware(exports.history), sagaMiddleware)));
+exports["default"] = exports.store;
